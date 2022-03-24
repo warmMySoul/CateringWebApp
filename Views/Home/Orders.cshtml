@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Заказы";
+}
+@model NewCateringWeb.Models.Client
+
+
+
+<h2>@ViewBag.Title</h2>
+
+<a href="~/Client/RegisterClient">
+    <button class="btn btn-light"> Регистрация нового клиента </button>
+</a>
+
+<hr />
+
+<a href="~/Purchase/AddPurchase">
+    <button class="btn btn-light"> Создать новый заказ </button>
+</a>
+
+
+    <hr />
+
+    <table class="table-bordered">
+        <tr class="bg-dark text-white">
+            <td style=" padding:5px;">Покупатель</td>
+            <td style=" padding:15px;">Дата</td>
+            <td style=" padding:5px;">Доставка</td>
+            <td style=" padding:5px;">Сумма заказа</td>
+            <td style=" padding:5px;">Статус заказа</td>
+            <td style=" padding:5px;">Комментарий</td>
+        </tr>
+
+        @foreach (var m in ViewBag.Purchases)
+        {
+            <tr>
+                @foreach (var c in ViewBag.Clients)
+                {
+                    if (c.ID == m.Client_ID)
+                    {
+                        <td style=" padding:5px;">@c.Name </td>
+                    }
+
+                }
+                <td style=" padding:5px;">@m.Date_Purch</td>
+                @if (m.Deliver)
+                {
+                    <td style=" padding:5px;">Да</td>
+                }
+                else
+                {
+                    <td style=" padding:5px;">Нет</td>
+                }
+                <td style=" padding:5px;">@m.TotalPrice</td>
+                <td style=" padding:5px;">@m.Status_Purch</td>
+                <td style=" padding:5px;">@m.Comment</td>
+
+            </tr>
+        }
+    </table>
+
+   
+
+
+

@@ -1,0 +1,31 @@
+﻿@{ 
+    ViewBag.Title = "Меню";
+}
+
+
+<div class="container px-4 py-5" id="featured-3">
+    <h2 class="pb-2 border-bottom">Наше меню:</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+
+        @foreach (var m in ViewBag.Menu)
+        {
+        <div class="feature col text-center ">
+            <div style="width: 20rem;height: 18rem; display: block; margin-left: auto; margin-right: auto;" class="feature-icon bg-primary bg-white">
+                <img style="width: 20rem;height: 18rem; " src=@m.Img alt=@m.Name>
+            </div>
+
+            <h3 style="height:90px;">@m.Name</h3>
+
+            <p style="height:60px; border: solid 2px #e8720b">@m.ShortDesc</p>
+
+            <p style="height:150px; border: solid 2px #ec931f">Состав: <br /> @m.Composition</p>
+
+            <p style="border: solid 2px #d6980f; padding: 5px; font-weight: 700">@m.Price.ToString("C")</p>
+
+        </div>
+        }
+        
+
+    </div>
+</div>
+

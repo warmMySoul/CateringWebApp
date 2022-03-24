@@ -1,0 +1,76 @@
+﻿@{ 
+    string name;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doodle's Burgers</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body style="padding-top: 0px">
+
+    <header class="p-3 bg-dark text-white">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <h2 style="padding-right:20px">
+                    <a href="~/Home/Index" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none link-light">
+                        Doodle's Burgers
+                    </a>
+                </h2>
+                @if (User.Identity.Name == "")
+                {
+                    name = "Гость";
+                }
+                else
+                {
+                    name = User.Identity.Name;
+                }
+
+                <ul class="nav text-white col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li class="nav-link px-2 text-white ">@Html.ActionLink("Главная", "Index", "Home")</li>
+                    <li class="nav-link px-2 text-white">@Html.ActionLink("Меню", "Menu", "Menu")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                       <li class="nav-link px-2 text-white">@Html.ActionLink("Сотрудники", "Booker", "Home")</li>
+                    <li class="nav-link px-2 text-white">@Html.ActionLink("Заказы", "Orders", "Home")</li>
+                    }
+                    
+                </ul>
+
+                <ul class="text-end nav">
+
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li style="padding-right:20px" class="navbar-text">Приветствую, @name</li>
+                        <li class="nav-link">@Html.ActionLink("Logout", "Logout", "Account")</li>
+                        <li class="nav-link">@Html.ActionLink("Register", "Register", "Account")</li>
+                    }
+                    else
+                    {
+                        <li style="padding-right:20px" class="navbar-text">Приветствую, @name</li>
+                        <li class="nav-link">@Html.ActionLink("Login", "Login", "Account")</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year</p>
+        </footer>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
